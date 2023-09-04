@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  run_all_benchmarks:
+    build: .
+    container_name: all_logging_benchmarks
+    entrypoint: ["dotnet", "bin/**/ArrayQueryingStrategies.dll", "--filter", "*"]
+    privileged: true
+    volumes:
+      - "./BenchmarkDotNet.Artifacts:/src/LoggingBestPractices.Benchmarks/BenchmarkDotNet.Artifacts"
