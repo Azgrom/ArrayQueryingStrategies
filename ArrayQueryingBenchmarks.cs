@@ -28,7 +28,7 @@ public class ArrayQueryingBenchmarks
     public void Setup()
     {
         structureOfList = StructureOfList.GenerateRandomTradesWithBogus((uint)Count);
-        listOfStructures = Order.GenerateRandomTradesWithBogus((uint)Count);
+        listOfStructures = ListOfStructures.GenerateRandomTradesWithBogus((uint)Count);
 
         _structureOfListTradeIdsAverage = (long)structureOfList.Average(x => (long)x.TradeId);
         _listOfStructuresTradeIdsAverage = (long)listOfStructures.Average(x => (long)x.TradeId);

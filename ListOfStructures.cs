@@ -1,4 +1,5 @@
 using System.Collections;
+using Bogus;
 
 namespace ArrayQueryingStrategies;
 
@@ -9,6 +10,18 @@ public class ListOfStructures : IList<Order>
     private ListOfStructures(IList<Order> listImplementation) => _listImplementation = listImplementation;
     
     public static implicit operator ListOfStructures(List<Order> trades) => new(trades);
+
+    public static ListOfStructures GenerateRandomTradesWithBogus(uint numberOfTrades) =>
+        new Faker<Order>()
+            .CustomInstantiator(
+                x => new Order(
+                    x.Random.Int(),
+                    x.Company.CompanyName(),
+                    x.Random.Hash(),
+                    x.Date.Between(new DateTime(2023, 1, 1), new DateTime(2023, 06, 30))
+                )
+            )
+            .Generate((int)numberOfTrades);
 
     public IEnumerator<Order> GetEnumerator() => _listImplementation.GetEnumerator();
 
